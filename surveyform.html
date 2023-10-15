@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: rgb(244, 180, 198);
+            
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        label {
+            display: inline-block;
+            margin-bottom: 5px;
+            text-align: right;
+            width: 150px;
+        }
+
+        #surveyForm {
+            background-color: rgb(160, 56, 73, 65%);
+            padding-top: 20px;
+            padding-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .gender {
+            display: block;
+            align-items: center;
+        }
+
+        .gender-cb {
+            margin-right: 10px;
+            display: inline;
+        }
+
+        .buttons {
+            text-align: center;
+            padding-top: 10px;
+        }
+
+        button {
+            display: inline-block;
+            border-radius: 10px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Survey Form</h2>
+        <form id="surveyForm" style="display: inline-block;">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" required>
+            
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" required>
+            
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" required>
+            
+            <label for="country">Country:</label>
+            <select id="country" required>
+                <option value="">Select Country</option>
+                <option value="India">India</option>
+                <option value="USA">USA</option>
+                <option value="Canada">Canada</option>
+                <option value="Australia">Australia</option>
+                <option value="UK">UK</option>
+                <option value="Singapore">Singapore</option>
+                <option value="France">France</option>
+                <option value="Italy">Italy</option>
+                <option value="Germany">Germany</option>
+                <!-- Add more countries here -->
+            </select>
+            <div class="gender">
+                <label>Gender:</label>
+                <label for="male" class="gender-cb"><input type="checkbox" id="male" name="gender" value="Male">Male</label>
+                <label for="female" class="gender-cb"><input type="checkbox" id="female" name="gender" value="Female">Female</label>
+            </div>
+            <label for="profession">Profession:</label>
+            <input type="text" id="profession" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+            
+            <label for="mobile">Mobile Number:</label>
+            <input type="tel" id="mobile" required>
+            <div class="buttons">
+                <button type="button" id="submit" onclick="submitForm()" style="margin-right: 10px; background-image: linear-gradient(orange, yellow);">Submit</button>
+                <button type="button" id="reset" onclick="resetForm()" style="margin-left: 10px; background-image: linear-gradient(rgb(0, 0, 255, 80%), rgb(113, 192, 228));">Reset</button>
+            </div>    
+        </form>
+    </div>
+
+    <script>
+        function submitForm() {
+            const form = document.getElementById("surveyForm");
+            if (form.checkValidity()) {
+                const firstName = document.getElementById("firstName").value;
+                const lastName = document.getElementById("lastName").value;
+                const dob = document.getElementById("dob").value;
+                const country = document.getElementById("country").value;
+                const gender = Array.from(document.querySelectorAll('input[name="gender"]:checked')).map(input => input.value);
+                const profession = document.getElementById("profession").value;
+                const email = document.getElementById("email").value;
+                const mobile = document.getElementById("mobile").value;
+
+                const message = `First Name: ${firstName}\nLast Name: ${lastName}\nDate of Birth: ${dob}\nCountry: ${country}\nGender: ${gender.join(', ')}\nProfession: ${profession}\nEmail: ${email}\nMobile Number: ${mobile}`;
+
+                alert(message);
+
+                form.reset();
+            } else {
+                alert("Please fill in all required fields.");
+            }
+        }
+
+        function resetForm() {
+            document.getElementById("surveyForm").reset();
+        }
+    </script>
+</body>
+</html>
